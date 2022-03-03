@@ -1,4 +1,4 @@
-// https://www.notion.so/terrankartiktellus/GraphQL-server-for-Product-Page-9a60b0a44b1c4057b886906164e9ba4a
+// https://www.notion.so/terrankartiktellus/GraphQL-Server-for-Products-page-e14df6a419094c5f8567719e1c3fe32e
 
 const { ApolloServer, gql } = require('apollo-server')
 
@@ -51,7 +51,7 @@ const CategoriesArray = [
 const typeDefs = gql`
           
           type Query{
-                    product(id: ID!): Product!,
+                    products: [Product!]!,
           }
           type Product {
                     id: ID!,
@@ -66,10 +66,7 @@ const typeDefs = gql`
 `;
 const resolvers = {
           Query:{
-            product: (parent,args)=>{
-              const {id} = args;
-              return ProductsArray.find( element=> element.id===id );
-            } 
+            products: ()=>ProductsArray
           },
 };
 const server = new ApolloServer({
